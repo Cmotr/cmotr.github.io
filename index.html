@@ -263,204 +263,14 @@
 
          <a class="item-prave" href="/~administrace/evidence-gramazi?prijemka=996&odebratprijemku=996" data-confirm="Opravdu odebrat příjemku gramáží?">Odebrat příjemku</a>
 </div>
-
-<div id="zalozky_parent">
-   <div class="zalozky_obal">
-      <div class="zalozky_main">
-         <div class="zm_left">
-                        <div
-                 data-target="zal-1"
-                  class="zalozky">
-               <a>Příjemka gramáží</a>
-            </div>
-
-         </div>
-         <div class="zm_right">
-
-         </div>
-      </div>
-
-      <div class="obsah_zalozek">
-            <div
-                 data-target="zal-1" class="obsah_zalozky">
-               <div>
-   Příjemka gramáží <b>č. 996</b>
-   | Stav: <b>Potvrzená</b>
-   | Vytvořil(a) <b>Marcela Hartošová</b> dne <b>29. 3. 2020 14:25</b>
-   | Poslední změna: <b>29. 3. 2020 14:28</b>
-   | Den v pořadí: <b>88</b>
-</div>
-<hr>
-
-
-<h2>Seznam položek</h2>
-<form class="prijemky-gramaze seznam" action="" method="post">
-   <table id="PrijemkaGramaziTable" class="table_razeni">
-<thead>
-   <tr class="zahlavi">
-      <th>ID</th>
-      <th>Kód</th>
-      <th>Název</th>
-      <th>Pozice</th>
-      <th>Skladem</th>
-      <th>Gramáž</th>
-      <th>Množství</th>
-      <th> </th>
-   </tr>
-   <tr class="zahlavi_filtr">
-      <th>
-   <input name="id_zbozi" class="text" placeholder="ID" value="">
-      </th>
-      <th>
-   <input name="kod" class="text" placeholder="Kód" value="">
-      </th>
-      <th>
-   <input name="nazev" class="text" placeholder="Název" value="">
-      </th>
-      <th>
-      </th>
-      <th>
-      </th>
-      <th>
-   <select name="gramaz" class="select %povinny%"><option value="" selected="selected"></option><option value="1000">1000g</option><option value="500">500g</option><option value="250">250g</option><option value="100">100g</option><option value="50">50g</option><option value="10">10g</option></select>
-      </th>
-      <th>
-      </th>
-      <th>
-      </th>
-   </tr>
-</thead>
-
-<tfoot><tr><td colspan="8"></td></tr></tfoot>
-</table>
-
-<script>
-$(function(){
-   var tableObject = $('#'+"PrijemkaGramaziTable");
-   var table = tableObject.DataTable({
-      processing: true,
-      serverSide: true,
-      bSortCellsTop: true,
-      bAutoWidth: false,
-      pageLength: 1,
-      searching: true,
-      stateSave: true,
-      paging: false,
-      stateDuration: 60 * 60 * 12,
-      stateLoaded: function (settings, data) {
-         var filtr = $('.zahlavi_filtr', tableObject);
-         for(var i in data.columns)
-            if(data.columns.hasOwnProperty(i) && data.columns[i].search.search != '')
-               $('[name="'+ settings.aoColumns[i].name +'"]', filtr).val(data.columns[i].search.search);
-      },
-      deferLoading: 0,
-      ajax: 'ajax.php?typ=datatable&prijemka=996&class=jadro%5Cadmin%5Csklad%5Cgramaze%5Cprijemky%5CPrijemkaGramaziTable&path=%2Fhosting%2Fwww%2Fmanucafe.cz%2Fwww%2Fjadro%2Fadmin%2Fsklad%2Fgramaze%2Fprijemky%2FPrijemkaGramaziTable.php',
-      dom: '<"top"'+""+'><"clear"><"wrapper"t""><"clear">',
-      language: datatable_language,
-
-      columns: [
-         { name: "id_zbozi",
-           className: "width-wrap",
-           orderable: true,
-           searchable: true },
-         { name: "kod",
-           className: "width-wrap",
-           orderable: true,
-           searchable: true },
-         { name: "nazev",
-           orderable: true,
-           searchable: true },
-         { name: "main_id",
-           className: "width-wrap",
-           orderable: false,
-           searchable: false },
-         { name: "skladem",
-           className: "text-right width-wrap",
-           orderable: true,
-           searchable: false },
-         { name: "gramaz",
-           className: "width-wrap",
-           orderable: true,
-           searchable: true },
-         { name: "mnozstvi",
-           className: "width-wrap",
-           orderable: true,
-           searchable: false },
-         { name: "id",
-           className: "width-wrap",
-           orderable: false,
-           searchable: false }
-      ]
-   });
-
-   table.columns().eq(0).each(function(colIdx){
-      $('select,input', tableObject.find('thead tr+tr th').eq(colIdx)).on('change', function(){
-         table.column($(this).attr('name') + ':name').search(this.value).draw();
-      });
-   });
-
-   table.on('init.td', function(){
-      $('.top-pages', $('#'+ "PrijemkaGramaziTable" +'_wrapper')).prepend($('<span class="removeFilter">Smazat filtr</span>').click(function(){
-         $('.zahlavi_filtr', tableObject).find('input,select').each(function(index){
-            table.column(index).search($(this).val('').val());
-         });
-
-         table.draw();
-      }));
-   });
-
-   table.on('xhr.td', function(e, settings, json){
-      if(json.hasOwnProperty('footer') && json.footer != null){
-         $('tfoot td', tableObject).html(json.footer);
-      }
-   });
-});
-</script>
+<div style="max-width:600px; padding:2rem;">
+<div class="form-group">
+                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                    </div>
+                    </div>
 
 
 
-
-
-   <hr>
-   <div class="button-menu">
-      <a href="/~administrace/evidence-gramazi">&laquo; zpět na přehled příjemek gramáží</a>
-
-   </div>
-</form>
-
-<script>
-   (function() {
-      var vytvoreni = $('.prijemky-gramaze.vytvoreni');
-
-      vytvoreni.on('click', 'button[type=submit]', function(e) {
-         e.preventDefault();
-
-         const button = $(this);
-         const row = button.closest('tr');
-         const input = row.find('input[name=mnozstvi]');
-
-         $.post(location.href, {
-            donow: 'addPrijemkaGramaziZbozi',
-            id_zbozi: Number(button.attr('data-id_zbozi')),
-            gramaz: Number(row.find('select[name=gramaz]').val()),
-            mnozstvi: Number(Math.floor(input.val().replace(',', '.'))),
-
-         }, function() {
-            input.val('');
-            $('.prijemky-gramaze.seznam').find('.dataTable').DataTable().draw();
-         });
-      });
-
-      vytvoreni.on('keydown', '[name=mnozstvi]', function(e) {
-         if(e.keyCode == 13)
-            $(e.target).closest('td').find('button').click();
-      });
-
-      window['onPrijemkaGramazeRemove'] = function() {
-         $('.prijemky-gramaze.seznam').find('.dataTable').DataTable().draw();
-      }
-   })();
-</script>
 
 <style>
    .prijemky-gramaze input { width: 40px; margin-right: 3px; margin-top: 0; margin-bottom: 0 }
@@ -489,6 +299,27 @@ $(function(){
 }
 #menu ul li a {
     font-size: 15px;
+}
+
+form.user .form-control-user {
+    font-size: .8rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    border-radius: .35rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 </style>
 
